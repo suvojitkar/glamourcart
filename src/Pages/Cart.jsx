@@ -2,8 +2,26 @@ import React, { useRef } from 'react'
 import './Cart.css'
 
 const Cart = (props) => {
-  const { state } = props.cartContext;
+  const { state=[] } = props?.cartContext;
   const finalPrice = useRef(0);
+
+  if(!state?.length) {
+    return <div className="cart-items" style={{marginLeft: "45%"}}>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <span> No item in cart!</span>
+  </div>
+  }
   return <>
     <div>
       <br />
@@ -11,7 +29,7 @@ const Cart = (props) => {
       <br />
       <br />
       {
-        state.map(data => {
+        state?.map(data => {
           finalPrice.current = finalPrice.current + (data.price * data.qty);
           return <div className="cart-items">
             <img src={data.images[0]} height="200px" width="200px" />
